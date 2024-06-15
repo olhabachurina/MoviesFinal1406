@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MoviesFinal1406.Models.Movie>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="styled-title">Top 10 Movies</h1>
+        <div class="row justify-content-center">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center" role="alert">
+                    No movies found.
+                </div>
+            }
+            else
+            {
+                @foreach (var movie in Model)
+                {
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="movie-card h-100 d-flex flex-column fade-in-up">
+                            <img src="@movie.PosterPath" class="movie-poster" alt="@movie.Title">
+                            <div class="movie-info flex-grow-1">
+                                <h2 class="movie-title">@movie.Title</h2>
+                                <p><strong>Year:</strong> @movie.Year</p>
+                                <p><strong>Genre:</strong> @movie.Genre</p>
+                                <p><strong>Director:</strong> @movie.Director</p>
+                                <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-primary">About</a>
+                                <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-warning">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
